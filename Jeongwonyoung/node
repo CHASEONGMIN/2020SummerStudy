@@ -1,0 +1,242 @@
+#include <iostream>
+
+using namespace std;
+
+enum Boolean { FALSE, TRUE };
+
+template <class Type>
+class BstNode;
+
+template <class Type>
+class BST;
+
+template <class Type>
+class Element {
+public:
+	Type key;
+};
+
+template <class Type>
+class BstNode {
+	friend class BST<Type>;
+private:
+	Element<Type> data;
+	BstNode *LeftChild, *RightChild;
+	void treeprint(int i);
+};
+
+template <class Type>
+class BST {
+public:
+	BST(BstNode<Type> *init = 0) { root = init; };
+	Boolean Insert(const Element<Type>& x);
+	BstNode<Type>* IterSearch(const Element<Type>&);
+	void del(const Element<Type> &x);
+	void treeprint()
+	{
+		cout << "\n"; root->treeprint(1);
+	}
+private:
+	BstNode<Type> *root;
+};
+template <class Type>
+void BstNode<Type>::treeprint(int l)
+{
+	if (this) {
+		(this->RightChild)->treeprint(l + 1);
+		cout << this->data.key << "\t";
+		(this->LeftChild)->treeprint(l + 1);
+	};
+};
+template <class Type>
+BstNode<Type>* BST<Type>::IterSearch(const Element<Type>& x)
+{
+	for (BstNode<Type> *t = root; t; )
+	{
+		if (x.key == t->data.key) return t;
+		if (x.key < t->data.key) t = t->LeftChild;
+		else t = t->RightChild;
+	}
+	return 0;
+};
+
+template <class Type>
+Boolean BST<Type>::Insert(const Element<Type>& x)
+{
+	BstNode<Type> *p = root;  BstNode<Type> *q = 0;
+	while (p) 
+	{
+		q = p;
+		if (x.key == p->data.key) return FALSE;
+		if (x.key < p->data.key) p = p->LeftChild;
+		else p = p->RightChild;
+	}
+
+	p = new BstNode<Type>;
+	p->LeftChild = p->RightChild = 0; p->data = x;
+	if (!root) root = p;
+	else if (x.key < q->data.key) q->LeftChild = p;
+	else q->RightChild = p;
+	return TRUE;
+}
+template <class Type>
+void BST<Type>::del(const Element<Type> &x)
+{
+	BstNode<Type> *p = root;
+	BstNode<Type> *q = 0;
+	BstNode<Type> *child = 0;
+
+	while (p)
+	{
+
+
+		if (x.key == p->data.key)
+			break;
+		if (x.key < p->data.key)
+		{
+			q = p;
+			p = p->LeftChild;
+		}
+		else
+		{
+			q = p;
+			p = p->RightChild;
+		}
+
+			
+	}
+
+	if (!p)
+	{
+		cout << "삭제할 값이 없습니다. ";
+		return;
+	}
+	else;
+
+	if (p->LeftChild == 0 && p->RightChild == 0) //단말노드의 삭제
+	{
+		if (q)
+		{
+			if (q->RightChild == p)
+			{
+				q->RightChild = 0;
+				cout << "삭제된 값 :  " << p->data.key;
+
+			}
+			else if (q->LeftChild == p)
+			{
+				q->LeftChild = 0;
+				cout << "삭제된 값 :   " << p->data.key;
+			}
+		}
+		else
+			root = 0; // 부모노드가 NULL인 노드는 루트노드이다. 루트노드를 삭제한다.
+
+	}
+
+	else if (p->LeftChild == 0 || p->RightChild == 0) // 하나의 서브트리를 가지는 경우
+	{
+
+		child = (p->LeftChild != 0) ? p->LeftChild : p->RightChild;
+
+		if (q)
+		{
+			if (q->LeftChild == p)
+			{
+				q->LeftChild = child;
+				cout << "삭제된 값  :   " << p->data.key;
+
+			}
+			else if (q->RightChild == p)
+			{
+				q->RightChild = child;
+				cout << "삭제된 값 :   " << p->data.key;
+
+			}
+
+		}
+		else
+			root = child;
+	}
+	else // 두개의 서브트리를 가지는 경우
+	{
+		cout << "두개의 서브트리를 가지고 있습니다 . " << "\n";
+
+		BstNode<Type> *search_p = p;
+		BstNode<Type> *search = 0;
+		search = search_p->RightChild;
+
+		while (search->LeftChild != 0) // 오른쪽 서브트리에서 가장 작은 값을 찾는다.
+		{
+			search_p = search;
+			search = search->LeftChild;
+		}
+		if (search_p->LeftChild == search)
+		{
+			search_p->LeftChild = search->RightChild;
+		}
+		else
+			search_p->RightChild = search->RightChild;
+
+		cout << "삭제될 값 : " << p->data.key << "교체 될 값 : " << search->data.key << "\n";
+		p->data.key = search->data.key;
+
+		delete search, search_p;
+
+	}
+}
+
+int main()
+{
+	int menu;
+	int count;
+	Element<int> inputKey;
+
+	BST<int> a;
+
+	while (1)
+	{
+		cout << " < 메뉴 > " << "\n";
+
+		printf("          1.삽입            2.삭제            3.탐색               4.중위순회            5. 종료\n");
+
+
+		cin >> menu;
+
+		switch (menu)
+		{
+		case 1:
+			cout << "삽입하려는 키의 갯수를 입력하시오 ";
+			cin >> count;
+			for (int i = 0; i < count; i++)
+			{
+				cout << i << "번째 삽입 합니다. :  ";
+				cin >> inputKey.key;
+				a.Insert(inputKey);
+				cout << "\n";
+			}
+			break;
+		case 2:
+			cout << "삭제하려는 키의 값을 입력하시오 ";
+			cin >> inputKey.key;
+			a.del(inputKey);
+			break;
+		case 3:
+			cout << "키 ??  를 탐색  !! ";
+			cin >> inputKey.key;
+			cout << "\n";
+			if (a.IterSearch(inputKey))
+				cout << "SUCCESS 키가 존재합니다";
+			else
+				cout << "FAIL 키가 존재하지 않습니다";
+			break;
+		case 4:
+			a.treeprint();
+			break;
+		case 5:
+			return 0;
+			break;
+		}
+	}
+
+}
