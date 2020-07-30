@@ -2,7 +2,7 @@
 
 using namespace std;
 
-enum Boolean { FALSE, TRUE };
+enum Boolean { FALSE, TRUE }; 
 
 template <class Type>
 class BstNode;
