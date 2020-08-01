@@ -32,7 +32,7 @@ public:
 	Boolean Insert(const Element<Type>& x);
 	BstNode<Type>* IterSearch(const Element<Type>&);
 	void del(const Element<Type> &x);
-	void treeprint()
+	void treeprint() 
 	{
 		cout << "\n"; root->treeprint(1);
 	}
