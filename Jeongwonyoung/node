@@ -4,7 +4,7 @@ using namespace std;
 
 enum Boolean { FALSE, TRUE }; 
 
-template <class Type>
+template <class Type> 
 class BstNode;
 
 template <class Type>
