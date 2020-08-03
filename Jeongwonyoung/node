@@ -10,7 +10,7 @@ class BstNode;
 template <class Type>
 class BST;
 
-template <class Type>
+template <class Type> 
 class Element {
 public:
 	Type key;
