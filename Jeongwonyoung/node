@@ -8,7 +8,7 @@ template <class Type>
 class BstNode;
 
 template <class Type>
-class BST;
+class BST; 
 
 template <class Type> 
 class Element {
