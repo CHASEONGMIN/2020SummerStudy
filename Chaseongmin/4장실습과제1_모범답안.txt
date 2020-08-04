@@ -1,0 +1,84 @@
+1. BOSTON 에 있는 부서의 이름은 무엇인가
+
+select dname
+from dept
+where loc = 'BOSTON' ;
+
+
+2. 담당업무가 ANALYST 인 사원의 이름, 입사일자를 보이시오
+
+select ename, hiredate
+fromm emp
+where job = 'ANALYST' ;
+
+
+3. 입사일자가 1981년 9월 1일 이후인 사원의 이름과 입사일자를 보이시오
+
+select ename, hiredate
+from emp
+where hiredate >= '1981-09-01' ;
+
+
+4. 연봉이 3000 에서 4000 사이인 사원의 이름, 연봉을 보이시오
+
+
+select ename, sal
+from emp
+where sal >= 3000 and sal <= 4000 ;
+
+또는
+
+select ename, sal
+from emp
+where sal between 3000 and 4000 ;
+
+
+
+5. 사장의 이름을 보이시오 (힌트: 사장은 매니저가 없다)
+
+select ename
+from emp 
+where mgr is null ;
+
+
+6. 담당업무가 MANAGER 가 아닌 사원들의 이름, 담당업무를 보이시오
+
+select ename, job
+from emp
+where job <> 'MANAGER' ;
+
+
+7. 담당업무가 CLERK, ANALYST, SALESMAN 인 사원들의 이름, 담당업무, 급여를 보이시오
+
+select ename, job, sal
+from emp 
+where job in ('CLERK, 'ANALYST', "SALESMAN') ;
+
+
+8. 연봉이 3000 에서 4000 사이 이거나  담당업무가 MANAGER 인 사원의 이름, 연봉을 보이시오
+
+select ename, sal
+from emp
+where (sal between 3000 and 4000)  or (job = 'MANAGER') ;
+ 
+
+
+9. 보너스를 받는 사원들의 이름과 보너스 금액을 보이시오
+
+select ename, comm
+from emp
+where comm is not null ;
+
+좀더 정확한답
+
+select ename, comm
+from emp
+where (comm is not null) and (comm>0) ;
+
+
+10. 부서번호가 20 인 사원 중에서 담당업무가 CLERK 이고 매니저의 사원번호가 7902인 사람의 이름을 보이시오
+
+select ename
+from emp
+where (deptno = 10) and (job='CLERK') and (mgr=7902)
+ 
