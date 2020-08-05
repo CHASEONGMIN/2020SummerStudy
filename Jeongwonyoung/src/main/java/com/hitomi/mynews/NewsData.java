@@ -7,7 +7,7 @@ public class NewsData implements Serializable {
     private String urlToImage;
     private String content;
 
-    public NewsData(){
+    public NewsData(){ 
 
     }
 
