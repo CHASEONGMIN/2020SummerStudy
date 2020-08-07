@@ -1,0 +1,109 @@
+1. 모든 사원들의 이름을 알파벳 역순으로 보이시오
+
+select ename
+from emp
+order by ename desc ; 
+
+
+2. 모든 담당업무명을 알파멧 순으로 보이시오
+
+select job
+from emp 
+order by job ;
+
+
+3. 모든 사원의 이름과 업무, 급여를 급여순으로 보이시오
+
+select ename, job, sal
+from emp
+order by sal ;
+
+
+4. 모든 사원의 이름과 부서번호를 입사일자순으로 보이시오
+
+select ename, deptno
+from emp
+order by hiredate ;
+
+
+5. 모든 사원의 사원번호, 이름, 급여를 부서번호순으로 보이시오
+
+select empno, ename, sal
+from emp
+order by deptno ;
+
+
+6. 담당 업무별 평균 연봉을 보이시오
+
+select job, avg(sal)
+from emp
+group by job ;
+
+
+7. 부서별 평균 연봉을 보이되 많은 연봉 우선으로 보이시오
+
+select deptno, avg(sal)
+from emp
+group by deptno
+order by avg(sal) desc ;  
+
+
+8. 각 부서별 최고 연봉을 보이시오
+
+select deptno, max(sal)
+from emp
+group by deptno ;
+
+
+9. 모든 사원의 정보를  담당업무에 대해 오름차순으로, 그리고 같은 업무 내에서는 연봉 내림차순으로 정렬하여 보이시오
+
+select *
+from emp 
+order by job, sal desc ;
+
+
+10. 각 매니저별 담당 사원의 인원수, 평균 연봉을 보이시오
+
+select mgr, count(*), avg(sal)
+from emp
+group by sal ;
+
+
+11. 각 담당업무별로 최고연봉과 최저 연봉을 보이시오
+
+select job, max(sal), min(sal)
+from emp
+group by job ;
+
+
+12. 담당업무별 인원수, 평균연봉 을 보이되 업무별 인원수가 3명 이상인 경우에 대해서만 보이시오
+
+select job, count(*), avg(sal)
+from emp
+group by job
+having count(*) >= 3 ;
+
+
+13. 각 부서별 사원수, 연봉합계를 보이시오
+
+select deptno, count(*), sum(sal)
+from emp
+group by deptno ;
+
+
+14. 각 부서별 사원수, 연봉합계를 보이되 사원수가 4명 이상인 부서의 정모만 보이시오.
+
+select deptno, count(*), sum(sal)
+from emp
+group by deptno 
+having count(*) >= 4 ;
+
+
+15. 부서번호, 부서별 사원수, 연봉합계 를 보이되 급여합계가 4000~5000 사이인 경우만 보이시오 . 단, 입사일자가 1981-01-01 이전 사원은 제외하고, 연봉합계가 많은 순으로 출력하시오 
+
+select deptno, count(*), sum(sal)
+from emp 
+where hiredate > '1981-01-01'
+group by deptno 
+   having sum(sal) between 4000 and 5000  ;
+
