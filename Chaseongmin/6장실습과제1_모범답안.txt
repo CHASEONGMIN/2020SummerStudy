@@ -1,0 +1,162 @@
+1. DALLAS 에서 근무하는 사원의 이름, 부서명, 담당업무를 보이시오
+
+select
+from emp e, dept d
+where e.deptno = d.deptno
+
+
+2. DALLAS 에서 근무하는 사원중 연봉이 4000 이하인 사람은 몇 명인가
+
+select count(*)
+from emp e, dept d
+where e.deptno = d.deptno
+and loc = 'DALLAS'
+and sal <= 4000 ;
+
+
+3. PRESIDENT (사장)이 근무하는 지역은 어디인가
+
+select loc
+from emp e, dept d
+where e.deptno = d.deptno
+and job = 'PRESIDENT' ;
+
+
+4. 모든 매니저의 이름과 부하직원의 이름을 보이시오 (매니저이름으로 정렬하여 보이시오)
+
+select m.ename, e.ename
+from emp e, emp m
+where e.mgr = m.empno
+order by m.ename ;
+
+
+5. 모든 매니저의 이름과 부하직원의 숫자를 보이시오
+
+select m.ename, count(e.ename)
+from emp e, emp m
+where e.mgr = m.empno
+group by m.ename ;
+
+
+6. 각 지역별로 근무하는 사원들의 연봉 합계를 보이시오 (지역명, 연봉합계)
+
+select loc, sum(sal)
+from emp e, dept d
+where e.deptno = d.deptno
+group by loc ;
+
+7. 매니저가 아닌 (부하직원이 없는) 사원들은 몇 명인가?
+
+select count(*)
+from emp m left outer join emp e on (m.empno=e.mgr)
+and m.empno is null ; 
+
+
+8. 매니저가 아닌 (부하직원이 없는) 사원들의 연봉합계는 얼마인가 (
+
+select sum(m.sal)
+from emp m left outer join emp e on (m.empno=e.mgr)
+where  e.empno is null ;
+
+
+9. 매니저이름, 부하직원이름, 부서명 을 보이시오 (매니저이름으로 정렬)
+
+select m.ename, e.ename, dname
+from emp m , emp e, dept d  
+where m.empno=e.mgr
+and m.deptno = d.deptno 
+order by m.ename ;
+
+
+10. SCOTT 의 매니저는 연봉이 얼마인가 
+
+select m.sal
+from emp m , emp e  
+where m.empno=e.mgr
+and e.ename = 'SCOTT' ;
+
+==============================================================================
+
+11. Asia 지역에 있는 국가의 국가명, 도시명을 보이시오
+
+select c.name, t.name 
+from country c, city t
+where c.code = t.countrycode
+and c.continent = 'Asia' ;
+
+
+12. South Korea 에 있는 도시명, 도시인구수(population)를 보이시오
+
+select t.name, t.population 
+from country c, city t
+where c.code = t.countrycode
+and c.name = 'South Korea' ;
+
+
+13. South Korea 에 있는 도시중 인구수가 100만 이상인 도시의 도시명, 도시인구수(population)를 보이시오
+
+select t.name, t.population 
+from country c, city t
+where c.code = t.countrycode
+and c.name = 'South Korea' 
+and t.population > 1000000 ;
+
+
+14. GNP 가 200 미만인 국가의 국가명, 도시명, 도시인구수를 보이시오
+
+select c.name, t.name, t.population 
+from country c, city t
+where c.code = t.countrycode
+and gnp < 200  ;
+
+
+15. Laos 에 있는 도시 수를 보이시오
+
+select count(*) 
+from country c, city t
+where c.code = t.countrycode
+and c.name = 'Laos'  ;
+
+
+16. 국가명, 그 국가의 도시의 수를 보이시오
+
+select c.name, count(*) 
+from country c, city t
+where c.code = t.countrycode
+group by c.name ;
+
+
+17. 국가명, 그 국가 도시의 평균 인구수를 보이시오 
+
+select c.name, avg(t.population) 
+from country c, city t
+where c.code = t.countrycode
+group by c.name ;
+
+
+18. 국가인구수가 1000만명이 안되는 국가의 국가명, 도시명을 보이시오
+
+select c.name, t.name 
+from country c, city t
+where c.code = t.countrycode
+and c.population < 10000000 ;
+
+
+19. EUROPE 에 있는 국가중 국가인구수가 1000만명이 안되는 국가의 국가명, 도시명을 보이시오
+
+select c.name, t.name 
+from country c, city t
+where c.code = t.countrycode
+and c.continent = 'EUROPE'
+and c.population < 10000000 ;
+
+
+20. Asia 지역에 있는 국가중 GNP가 20000 이상이고 인구수가 3000만 이상인  국가의 국가명, GNP, 도시명, 도시인구수를 보이시오
+
+select c.name, gnp, t.name, t.population 
+from country c, city t
+where c.code = t.countrycode
+and c.continent = 'Asia'
+and gnp > 20000
+and c.population > 30000000 ;
+
