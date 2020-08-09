@@ -1,0 +1,130 @@
+1. 연봉을 가장 적게 받는 사원의 이름, 연봉, 부서명을 보이시오
+
+select ename, sal, dname
+from emp e, dept d
+where e.deptno = d.deptno
+and sal = ( select min(sal) from emp) ;
+
+
+2. 연봉을 평균 이상 받는 사원들의 이름, 연봉, 근무지를 보이시오
+
+select ename, sal, loc
+from emp e, dept d
+where e.deptno = d.deptno
+and sal >= ( select avg(sal) from emp) ;
+
+3. 연봉을 가장 적게 받는 사원의 매니저는 누구인가? 
+
+select m.ename
+from emp e, emp m
+where e.mgr = m.empno
+and e.sal = ( select min(sal) from emp) ;
+
+
+4. 연봉을 가장 많이 받는 사원과 적게 받는 사원의 이름, 연봉을 보이시오
+
+select ename, sal
+from emp
+where sal = (select min(sal) from emp) 
+   or sal = (select max(sal) from emp);
+
+
+5. 연봉을 가장 많이 받는 사원과 적게 받는 사원을 제외한 나머지 사원들의 총 연봉 합계를 보이시오 
+
+select sum(sal)
+from emp
+where sal <> (select min(sal) from emp) 
+  and sal <> (select max(sal) from emp);
+
+
+6. SALES 부서에 속한 사원들과 동일한 담당업무를 갖는 사원들의 이름, 담당업무를 보이시오 (단 SALES 부서에 속한 사원은 제외)
+
+select ename, job
+from emp e, dept d
+where e.deptno = d.deptno
+and job in ( select job 
+            from emp e, dept d 
+            where e.deptno = d.deptno
+            and dname = 'SALES') 
+and empno not in ( select empno 
+                   from emp e, dept d 
+                   where e.deptno = d.deptno
+                   and dname = 'SALES') ;
+
+
+7. 연봉을 평균보다 500 이상 적게 받는 사원들의 이름, 부서명, 연봉을  
+
+select ename, dname, sal
+from emp e, dept d
+where e.deptno = d.deptno
+and sal < (select avg(sal) from emp )-500 ;
+
+
+8. JAMES 보다 입사일이 빠른 사원들의 이름, 담당업무, 입사일을 보이시오
+
+select ename, job, hiredate
+from emp 
+where hiredate < (select hiredate from emp where ename='JAMES')
+
+
+9. ADAMS 보다 연봉을 많이 받는 사람은 모두 몇명인가
+
+select count(*)
+from emp 
+where sal > (select sal from emp where ename='ADAMS')
+
+
+=============================================================
+
+10. GNP가 가장 높은 국가의 국가명, GNP 를 보이시오
+
+select name, gnp
+from country
+where gnp = (select max(gnp) from country);
+
+
+11. 인구수가 가장 적은 국가의 국가명, GNP 를 보이시오
+
+select name, gnp
+from country
+where population = (select min(population) from country);
+
+
+12. 인구수가 평균 이상인 국가중 GNP가 50000 이상인 국가의 이름과 GNP 를 보이시오.
+
+select name, gnp
+from country
+where population >= (select avg(population) from country)
+and gnp > 50000 ;
+
+
+13. 한국(South Korea)보다 GNP 가 높은 ASIA 국가들의 이름과 GNP 를 보이시오
+
+select name, gnp
+from country
+where gnp > (select gnp from country where name = 'South Korea')
+and continent = 'Asia' ;
+
+
+14. 일본(Japan)보다 인구수가 많은 ASIA 국가들의 이름, 인구수를 보이시오 
+
+select name, population
+from country
+where population > (select population from country where name = 'Japan')
+and continent = 'Asia' ;
+
+
+15. 영토면적(SurfaceArea)이 가장 작은 국가의 이름, 영토면적을 보이시오
+
+select name, SurfaceArea
+from country
+where SurfaceArea > (select min(SurfaceArea) from country)  ;
+
+
+16. Canada 보다 영토 면적이 넓은 국가는 모두 몇나라인지 보이시오
+
+select count(*)
+from country
+where SurfaceArea > (select SurfaceArea from country where name = 'Canada')  ;
+
+
