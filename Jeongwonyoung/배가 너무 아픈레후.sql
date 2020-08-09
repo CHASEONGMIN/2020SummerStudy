@@ -25,5 +25,5 @@ begin
     values ( vsid, vcid, p_grade, year(now()) );
   end if;
   
-end $$ 
+end $$
 delimeter  ;
