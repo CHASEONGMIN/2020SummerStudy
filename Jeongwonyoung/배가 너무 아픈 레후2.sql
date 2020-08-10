@@ -25,5 +25,5 @@ begin
    end while;
    close Stud_cursor;
    
- end //
+ end // 
  delimeter  ;
