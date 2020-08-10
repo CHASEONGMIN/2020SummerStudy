@@ -1,0 +1,56 @@
+1. 연봉을 적게 받는 하위 5 명의 이름, 부서명, 연봉을 보이시오
+
+select ename, dname, sal
+from emp e, dept d
+where e.deptno = d.deptno
+order by sal
+limit 5;
+ 
+
+2. 연봉을 평균 보다 적게 받는 사람들 중에서 연봉이 많은 순서대로 3명을 보이시오 (사원번호, 이름, 연봉) 
+
+select empno, ename, sal
+from emp
+where sal < (select avg(sal) from emp)
+order by sal desc
+limit 3;
+
+
+3. SCOTT 보다 연봉을 많이 받는 사람들 중에서 SCOTT 와 연봉이 비슷한 사람 3명의 이름, 부서명, 연봉을 보이시오
+
+select ename, dname, sal
+from emp e, dept d
+where e.deptno = d.deptno
+and sal > (select sal from emp where ename='SCOTT')
+order by sal 
+limit 3;
+
+
+4. BLAKE 보다 입사일이 늦은 사람들 중에서 상위 2명을 제외하고 3명의 이름, 부서명, 입사일자를 보이시오 (입사일자가 빠른순으로)
+
+select ename, dname, hiredate
+from emp e, dept d
+where e.deptno = d.deptno
+and hiredate > (select hiredate from emp where ename='BLAKE')
+order by hiredate
+limit 2, 3;
+
+
+5. 연봉금액이 SMITH 와 FORD 사이인 사원의 이름, 연봉을 보이시오. (단 SMITH 와 FORD 는 누가 더연봉을 많이 받는지 알 수 없다) 
+
+
+select ename, sal
+from emp 
+where sal >= (select min(sal) from emp where ename in ('SMITH','FORD'))
+  and sal <= (select max(sal) from emp where ename in ('SMITH','FORD')) ;
+
+
+6. 소속된 사원의 연봉 총액이 많은 상위 2개의 부서의 이름과, 연봉 총액을 보이시오
+
+select dname, sum(sal)
+from emp e, dept d
+where e.deptno = d.deptno
+group by dname
+order by sum(sal) desc
+limit 2 ;
+
