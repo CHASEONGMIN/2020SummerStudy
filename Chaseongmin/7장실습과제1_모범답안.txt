@@ -1,0 +1,54 @@
+1. 다음과 같은 컬럼을 갖는 테이블 student 를 생성하시오. 자료형은 각자 알아서 한다) 
+(생략)
+
+2. 4명의 학생 정보를 입력하시오 (남학생 2명, 여학생 2명)
+(생략)
+
+3. student 테이블에 score (학점) 컬럼을 추가하시오
+(생략)
+
+4. student 테이블에서 reg_order 를 admit_order 로 변경하시오
+(생략)
+
+5. 남학생들의 학점은 2.5 로 여학생들의 학점은 3.0 으로 입력하시오 (두개의 SQL문 필요) 
+(생략)
+
+
+[emp, dept table]
+
+6. 급여가 가장 많은  사원의 급여를 10% 줄여서 저장하시오 
+
+update emp
+set sal = sal * 0.9
+where sal = (select max(sal) from emp) ;
+
+
+7. 근무지가  ‘BOSTON’ 인 사원에게 보너스(comm)를  급여의 50% 수준으로 지급하도록 입력하시오
+
+update emp
+set comm = sal * 0.5
+where deptno = (select deptno from dept where loc = 'BOSTON') ;
+
+
+8. 입사년도가 1980 년도인 사원들의 급여를 5000 씩 올리시오
+
+update emp
+set sal = sal + 5000
+where YEAR(hiredate) = 1980 ;
+
+
+9. BLAKE 의 부하직원들의 급여를 4000 씩 올리시오
+
+update emp
+set sal = sal + 4000
+where mgr = (select empno from emp where ename = 'BLAKE') ;
+
+
+10. 매니저가 FORD 인 사원들의 매니저를  CLARK 로 고치시오.
+(수업시간에 배운 문법으로는 해결할수 없음)
+
+update emp
+set mgr = (select empno from (select empno from emp where ename = 'CLARK')as temp)
+where mgr = (select empno from (select empno from emp where ename = 'FORD') as temp )  ;
+
+
