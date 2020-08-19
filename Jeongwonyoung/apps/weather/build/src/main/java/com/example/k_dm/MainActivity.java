@@ -45,7 +45,7 @@ public class MainActivity extends Activity{
     ListView listView1;
     ListView listView2;
     ArrayAdapter<String> adapter;
-    ArrayAdapter<String> adapter2;
+    ArrayAdapter<String> adapter2; 
     ArrayList<String> listItem;
     ArrayList<String> listItem2;
 
