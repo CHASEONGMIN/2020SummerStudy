@@ -19,7 +19,7 @@ import java.util.Date;
 public class setting extends Activity {
     ArrayAdapter<CharSequence> adspin1, adspin2, adspin3, adspin4, adspin5, adspin6, adspin7; //어댑터를 선언했습니다. adspint1(서울,인천..) adspin2(강남구,강서구..)
     String choice_do = "";
-    String choice_se = "";//검색시 선택된 매세지를 띄우기 위한 선언하였습니다. 그냥 선언안하고 인자로 넘기셔도 됩니다.
+    String choice_se = "";//검색시 선택된 매세지를 띄우기 위한 선언하였습니다. 그냥 선언안하고 인자로 넘겨도 됩니다.
     String hosun = "";
     String yeok = "";
     String hang = "";
@@ -44,11 +44,11 @@ public class setting extends Activity {
         adspin1 = ArrayAdapter.createFromResource(this, R.array.spinner_do, android.R.layout.simple_spinner_dropdown_item);
         adspin3 = ArrayAdapter.createFromResource(this, R.array.spinner_do, android.R.layout.simple_spinner_dropdown_item);
         adspin5 = ArrayAdapter.createFromResource(this, R.array.train, android.R.layout.simple_spinner_dropdown_item);//처번째 어댑터에 값을 넣습니다. this=는 현재class를 의미합니다. R.array.spinner_do는 이곳에 도시를 다 쓸 경우 코딩이 길어지기 때문에 value->string.xml에 따로 String값들을 선언해두었습니다. //R.layout.simple_~~~는 안드로이드에서 기본제공하는 spinner 모양입니다. 다른것도 있는데 비슷합니다.
-        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);//이부분이 정확히 말로 설명을 못하겠습니다. 아무튼 필요합니다. 헤헤 고수분들 도와주세요.
+        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin1.setAdapter(adspin1);
-        adspin3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);//이부분이 정확히 말로 설명을 못하겠습니다. 아무튼 필요합니다. 헤헤 고수분들 도와주세요.
+        adspin3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin3.setAdapter(adspin3);
-        adspin5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);//이부분이 정확히 말로 설명을 못하겠습니다. 아무튼 필요합니다. 헤헤 고수분들 도와주세요.
+        adspin5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin5.setAdapter(adspin5);
 //어댑터에 값들을 spinner에 넣습니다. 여기까지 하시면 첫번째 spinner에 값들이 들어갈 것입니다.
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//첫번째 spinner 클릭시 이벤트 발생입니다. setO 정도까지 치시면 자동완성됩니다. 뒤에도 마찬가지입니다.
@@ -58,11 +58,11 @@ public class setting extends Activity {
                     choice_do = "서울특별시";//버튼 클릭시 출력을 위해 값을 넣었습니다.
                     adspin2 = ArrayAdapter.createFromResource(setting.this, R.array.spinner_do_seoul, android.R.layout.simple_spinner_dropdown_item);//서울일 경우에 두번째 spinner에 값을 넣습니다. //그냥 this가 아닌 Main~~~인 이유는 그냥 this는 메인엑티비티인 경우만 가능합니다. //지금과 같이 다른 함수안이나 다른 클래스에서는 꼭 자신의 것을 넣어주어야 합니다.//혹시나 다른 class -> Public View밑에서 작업하시는 분은 view명.getContext()로 해주셔야 합니다.//예로 View rootView =~~ 선언하신 경우에는 rootView.getContext()써주셔야합니다. this가 아니라요.
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spin2.setAdapter(adspin2);//두번째 어댑터값을 두번째 spinner에 넣었습니다.
+                    spin2.setAdapter(adspin2);//두번째 어댑터값을 두번째 spinner에 
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//저희는 두번째 선택된 값도 필요하니 이안에 두번째 spinner 선택 이벤트를 정의합니다.
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            choice_se = adspin2.getItem(i).toString();//두번째 선택된 값을 choice_se에 넣습니다.
+                            choice_se = adspin2.getItem(i).toString();//두번째 선택된 값을 choice_se에 
                         }
 
                         @Override
