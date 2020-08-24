@@ -548,7 +548,7 @@ public class MainActivity extends Activity{
     public ArrayList<String> getTextt(){
         ArrayList<String> Headline = new ArrayList<String>();
         try{
-            //////// xml 문서를 파싱하기위한 준비
+            //////// xml 문서를 파싱 준비
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 //////// xml 웹 문서를 Document객체로 만드는 과정
