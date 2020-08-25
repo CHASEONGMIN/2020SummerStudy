@@ -66,10 +66,10 @@ public class setting extends Activity {
                         }
 
                         @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {//아무것도 선택안될시 부분입니다. 자동완성
+                        public void onNothingSelected(AdapterView<?> adapterView) {//아무것도 선택안될시 부분. 자동완성
                         }
                     });
-                } else if (adspin1.getItem(i).equals("인천광역시")) {//똑같은 소스에 반복입니다. 인천부분입니다.
+                } else if (adspin1.getItem(i).equals("인천광역시")) {//똑같은 소스에 반복- 인천부분.
                     choice_do = "인천광역시";
                     adspin2 = ArrayAdapter.createFromResource(setting.this, R.array.spinner_do_incheon, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,7 +84,7 @@ public class setting extends Activity {
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
                     });
-                } else if (adspin1.getItem(i).equals("경기도")) {//똑같은 소스에 반복입니다. 인천부분입니다.
+                } else if (adspin1.getItem(i).equals("경기도")) {//똑같은 소스에 반복. 인천부분
                     choice_do = "경기도";
                     adspin2 = ArrayAdapter.createFromResource(setting.this, R.array.spinner_do_gg, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -108,7 +108,7 @@ public class setting extends Activity {
 
             }
         });
-        btn_refresh.setOnClickListener(new View.OnClickListener() {//버튼 클릭시 이벤트입니다.
+        btn_refresh.setOnClickListener(new View.OnClickListener() {//버튼 클릭시 이벤트
             @Override
             public void onClick(View view) {
                 Toast.makeText(setting.this, "저장되었습니다", Toast.LENGTH_SHORT).show();
@@ -120,7 +120,7 @@ public class setting extends Activity {
         });
 
 
-        spin3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//첫번째 spinner 클릭시 이벤트 발생입니다. setO 정도까지 치시면 자동완성됩니다. 뒤에도 마찬가지입니다.
+        spin3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//첫번째 spinner 클릭시 이벤트 발생. setO 정도까지 치시면 자동완성됩니다. 뒤에도 마찬가지입니다.
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {//제대로 자동완성하셨다면 이부분이 자동으로 만들어 질 것입니다. int i는 포지션이라 하여 제가 spinner에 몇번째걸 선택했는지 값이 들어갑니다. 필요하겠죠? ㅎㅎ
                 if (adspin3.getItem(i).equals("서울특별시")) {//spinner에 값을 가져와서 i 보이시나요 제가 클릭 한것이 서울인지 확인합니다.
