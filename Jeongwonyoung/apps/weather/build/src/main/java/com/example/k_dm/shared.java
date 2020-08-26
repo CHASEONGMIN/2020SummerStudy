@@ -253,7 +253,7 @@ public class shared {
 
      */
 
-    public static long getLong(Context context, String key) {
+    public static long getLong(Context context, String key) {  
 
         SharedPreferences prefs = getPreferences(context);
 
