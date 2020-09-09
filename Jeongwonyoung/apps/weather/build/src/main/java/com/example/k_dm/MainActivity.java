@@ -558,7 +558,7 @@ public class MainActivity extends Activity{
             Document doc = builder.parse(xml);
 
             //////// 엘리먼트 접근
-            Element root = doc.getDocumentElement(); // 루트 엘리먼트
+            Element root = doc.getDocumentElement(); // 루트 엘리먼트 
             // item이란 이름을 가진 모든 요소를 찾는다.
             NodeList items = root.getElementsByTagName("item");
             for(int i=0;i<items.getLength();i++){ // 찾은 갯수만큼 루프
