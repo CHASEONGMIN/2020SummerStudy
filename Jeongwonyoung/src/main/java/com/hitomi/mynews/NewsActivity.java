@@ -85,7 +85,7 @@ public class NewsActivity extends AppCompatActivity{
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) { 
 
             }
         });
